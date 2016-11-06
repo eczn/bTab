@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="css/jsclock.css">
 	<link rel="stylesheet" href="css/note.css">
 	<title>newTab</title>
+	<link rel="stylesheet" href="css/global.css">
 </head>
 <body>
 	<div class="main">
@@ -35,9 +36,12 @@
 	</div>
 	
 	<div class="note-edit">
-		<div class="note" id=""> <!-- id = note_id -->
+		<div class="note" id="">
 			<input class="note-title" placeholder="title" type="text">
-			<input class="date-select" type="date">
+			<div class="dt">
+				<input class="date-select" type="date">
+				<input class="time-select" type="time">
+			</div>
 			<textarea class="note-des" placeholder="toDo..." name="" id="" cols="30" rows="10"></textarea>
 			<span id="note-save">贴上</span>
 		</div>

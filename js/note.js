@@ -1,20 +1,52 @@
 // note.js
 // note: Loader&Writer
+var defaultRender = function(str){
+	// console.log(str); 
+	$(".note-display").html(str); 
+
+	$(".note-del-before").click(function(e){
+		var temp = $(this).parent().parent(); 
+		note.delByPosition(temp.attr('list-position')); 
+		
+		temp.addClass( (temp.attr('list-position') == 0)? 'firPop':'notFirPop');
+		setTimeout(function(){
+			temp.remove(); 
+		},400); 
+	}); 
+
+}
 
 $("#note-save").click(function(e){
 	// $("#123 .note-title").val("1111"); 
+	var titleInput = $(".note-edit .note .note-title").val(); 
+	var bodyInput = $(".note-edit .note .note-des").val(); 
+	var dateInput = $(".note-edit .note .date-select").val(); 
+	var timeInput = $(".note-edit .note .time-select").val(); 
 
-	var elem = {
-		title: 'test', 
-		body: 'test', 
-		date: new Date()
-	}; 
 
-	note.push(elem); 
+	note.push({
+		title: titleInput, 
+		body: bodyInput, 
+		date: new Date(dateInput+" "+ timeInput)
+	}); 
+
+	chrome.notifications.create(
+		'id1',
+		{
+			type: 'list',
+			title: "贴好了",
+			message: titleInput,
+			iconUrl: "images/geometry22.png",
+			items: [{ title: "", message: bodyInput}]
+		},
+		function(e) { 
+			// console.log(e); 
+		} 
+	);
+
+	note.render(defaultRender); 
 
 });
-
-
 
 
 // ===== 
@@ -56,13 +88,11 @@ var note = (function(doc){
 		return num; 
 	}
 
-	var render = function(){
-
-	}
-
 	var push = function(elem){
 		elem.id = getCounter(); 
 
+		console.log(elem); 
+		console.log(list); 
 		list.push(elem); 
 		localStorage.list = JSON.stringify(list);
 	}
@@ -82,12 +112,15 @@ var note = (function(doc){
 		var middle = ''; 
 		var total = ''; 
 
-		for (elem in list){
-			middle = templateStr.replace('$title$', list[elem].title); 
-			middle = middle.replace('$id$', list[elem].id); 
-			middle = middle.replace('$body$', list[elem].body); 
-			middle = middle.replace('$date$', list[elem].date); 
-			middle = middle.replace('$pos$', elem); 
+		var listR = list.slice(0, list.length);
+		listR.reverse(); 
+
+		for (elem in listR){
+			middle = templateStr.replace('$title$', listR[elem].title); 
+			middle = middle.replace('$id$', listR[elem].id); 
+			middle = middle.replace('$body$', listR[elem].body); 
+			middle = middle.replace('$date$', listR[elem].date); 
+			middle = middle.replace('$pos$', listR.length-1-elem);
 			// alert(middle); 
 			total += middle; 
 			middle = null; 
@@ -95,7 +128,7 @@ var note = (function(doc){
 
 		callBack(total); 
 	}
-	// console.log(list); 
+
 
 	console.log(list); 
 
@@ -111,17 +144,9 @@ var note = (function(doc){
 })(window.doc)
 
 
-note.render(function(str){
-	// console.log(str); 
-	$(".note-display").html(str); 
 
-	$(".note-del-before").click(function(e){
-		var temp = $(this).parent().parent(); 
-		note.delByPosition(temp.attr('list-position')); 
-		
-		temp.addClass( (temp.attr('list-position') == 0)? 'firPop':'notFirPop');
-		setTimeout(function(){
-			temp.remove(); 
-		},400); 
-	}); 
-});  
+
+
+note.render(defaultRender); 
+
+
