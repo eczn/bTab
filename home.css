@@ -1,0 +1,155 @@
+/*home.css*/
+* {
+	padding: 0; margin: 0;
+	font-family: "Source Code Pro",consolas,Menlo,"PingFang SC","Microsoft YaHei",monospace;
+}
+
+canvas {
+	position: absolute;
+	display: block;
+	/*top: -300px;*/
+}
+
+.circle {
+	position: relative;
+	margin: -200px auto 0 auto;
+	color: white;
+	font-size: 18px;
+	height: 600px;
+	width: 600px;
+	border-radius: 300px;
+	opacity: 0.5;
+	filter: blur(2px);
+	/*padding: 100px;*/
+	box-shadow: .5em .3em 0 rgba(0,0,0,.5);
+	transform: rotateY(0deg);
+	background-color: #202220;
+
+	transition: box-shadow 1s, -webkit-filter 1s, transform 1s, opacity 1s;
+}
+.circle:hover {
+	box-shadow: -2em .6em 0 rgba(0,0,0,.5);
+	/*-webkit-transform: rotate3d(1, 0, 0, 20deg) rotate3d(0, 1, 0, -10deg);*/
+	filter: blur(0);
+	transform: rotateY(20deg);
+	opacity: .8; 
+	transition: box-shadow 1s, -webkit-filter 1s, transform 1s, opacity 1s;
+}
+
+.blur {
+	filter: blur(20px);
+	-ms-filter: blur(20px);
+	-webkit-filter: blur(20px);
+	transition-property: -webkit-filter, -ms-filter, filter;
+	transition-duration: 1s;
+
+}
+
+.msg {
+	width: 300px; 
+	height: 200px; 
+	position: absolute;
+	left: 150px;
+	top: 355px;
+	text-align: center;
+	user-select:none;
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-o-user-select:none;
+	position: absolute;
+	cursor: pointer;
+	border-top: 3px solid rgba(0,0,0,0);
+	opacity: 1; 
+	transition: all 1s;
+}
+
+.msg > p {
+	transition-property: transform;
+	transition-duration: 1s;
+}
+.msg:hover > p {
+	transform: rotate(5deg);
+}
+
+.msg:hover {
+	/*font-size: 20px;*/
+	color: transparent;
+
+	/*background-color: rgba(0,0,0,.5); */
+	border-top: 3px solid rgba(255,255,255,.8);
+	border-radius: 300px 0px 200px 0px / 100px 0 100px 0;
+
+	text-shadow: 15px 12px 0 #FFF; 
+	transition: all 1s;
+	transform: rotate(-5deg);
+}
+
+.msg:active {
+	font-size: 20px; 
+	border-top: 3px solid rgb(231, 178, 103);
+	transition: all 1s;
+}
+
+.theFooter {
+	position: fixed;
+	width: 100%; 
+	bottom: 0; 
+	text-align: center;
+	height: 64px;
+	background-color: #202220;
+	border-radius: 1100px 1100px 0px 0px / 60px 60px 0px 0px;
+	overflow-y: hidden;
+	background-image: url(homeNeed-v2.png); 
+	background-repeat: no-repeat;
+	background-size: 600px; 
+	background-position: right bottom;
+	transition: height 1s;
+}
+
+.theFooter:hover {
+	height: 85%; 
+	
+	transition: all 1s;
+}
+
+a {
+	color: white;
+	font-size: 16px;
+}
+
+.intro {
+	padding: 3em 4em;
+	top: 6em;
+	left: 2em;
+	color: white;
+	position: absolute;
+	/*top: 80px; */
+	width: 40%; 
+	text-align: left;
+	border: 1px solid #FFF;
+	border-radius: 4em 0px 4em 0;
+	/*box-shadow: 8px 6px 0px #202820;*/
+
+}
+.intro > h1 {
+	text-align: left;
+	margin-bottom: 5px;
+}
+
+
+/* 141 123 98 text */
+/* 221 168 93 bgc  */
+::selection {
+    background: rgb(221,168,93); 
+    /*color: rgb(141,123,98);*/
+}
+
+::-moz-selection {
+    background: rgb(221,168,93); 
+    /*color: rgb(141,123,98);*/
+}
+
+::-webkit-selection {
+    background: rgb(221,168,93); 
+    /*color: rgb(141,123,98);*/
+}

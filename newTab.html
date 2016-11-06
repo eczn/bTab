@@ -1,0 +1,61 @@
+<!doctype HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html" charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge; chrome=1" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="HandheldFriendly" content="true">
+	<link rel="stylesheet" href="css/jsclock.css">
+	<link rel="stylesheet" href="css/note.css">
+	<title>newTab</title>
+</head>
+<body>
+	<div class="main">
+		<canvas id="clock"></canvas>
+		<!-- <ul id="paper">
+			<li></li>
+		</ul> -->
+		<div id="content-container">
+			
+		</div>
+<!-- 		<p>头像、名字 没有特别的意义；</p>
+		<p>出生、出身 也不应该去相信；</p>
+		<p>知识、命运 也无需了解过多；</p> -->
+		<footer>Cscw ★ varEczn@GDUT</footer>
+	</div>
+	
+	<span id="setting">设置</span>
+
+	<div class="input-area">
+		<div id="input-background"></div>
+		<textarea id="content-input" placeholder="正文内容 出生、出身 也不应该去相信；" cols="30" rows="10"></textarea>
+		<!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+		<textarea id="footer-input" placeholder="footer内容" cols="30" rows="10"></textarea>
+		<span id="toStoreNew">提交</span>
+	</div>
+	
+	<div class="note-edit">
+		<div class="note" id=""> <!-- id = note_id -->
+			<input class="note-title" placeholder="title" type="text">
+			<input class="date-select" type="date">
+			<textarea class="note-des" placeholder="toDo..." name="" id="" cols="30" rows="10"></textarea>
+			<span id="note-save">贴上</span>
+		</div>
+	</div>
+
+	<div class="note-display">
+<!-- 		<div class="note" id="123"> 
+			<div class="note-title" placeholder="title" type="text">title</div>
+			<div class="date-select" type="date">date</div>
+			<div class="note-des" placeholder="toDo..." name="" id="" cols="30" rows="10">todo</div>
+		</div> -->
+	</div>
+
+</body>
+<!-- <script src="js/background.js"></script> -->
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/jClock.js" type="application/javascript"></script>
+<script src="js/bTabLoader.js"></script>
+<script src="js/note.js"></script>
+<script src="js/main.js"></script>
+</html>

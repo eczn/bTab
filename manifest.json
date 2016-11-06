@@ -1,0 +1,23 @@
+{
+	"manifest_version": 2,
+
+	"name": "jTab",
+	"description": "jTab Startpage for new tab",
+	"version": "0.0.5", 
+	"browser_action": {
+		"default_icon": "icon.ico"
+	},
+	"permissions": [ 
+		// "activeTab",
+		// "bookmarks",
+		"notifications"
+	],
+	"chrome_url_overrides": {
+		"newtab": "newTab.html"
+	},
+
+	"background": {
+		"scripts": ["js/background.js"],
+		"persistent": false // add this line if you use event page.
+	}
+}
