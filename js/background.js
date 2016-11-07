@@ -5,49 +5,70 @@ chrome.browserAction.onClicked.addListener(function(tab){
     });  
 });
 
-// function notify(){
-// 	var opt = {
-// 		type: "list",
-// 		title: "桌面提醒",
-// 		message: "msg",
-// 		iconUrl: "icon128.png",
-// 		items: [
-// 			{ title: "1.", message: "下班了"},
-// 			{ title: "2.", message: "吃饭了."},
-// 			{ title: "3.", message: "中奖了."}
-// 		]
-// 	}
-// 	chrome.notifications.create('', opt, function(id){
 
-// 	}); 
+var watchDog = (function(){
+	var noteConfig = new Object(); 
+	var list = new Object(); 
 
-// 	chrome.notifications.create('222', opt, function(id){
-// 		console.log("id: "+ id); 
-// 	});
-// }
+	if (localStorage.hasOwnProperty('config')){
+		noteConfig = JSON.parse(localStorage['config']); 
 
+	
+	} else {
+		var defaultConfig = {
+			counter: 0, 
+			master: 'eczn'
+		};
+		localStorage.config = JSON.stringify(defaultConfig); 
 
-// notify();
+		noteConfig = defaultConfig; 
+		// counter = parseInt(localStorage.config.counter); 
+		// call config function 
+	}
 
-// var baba = {
-// 	type: 'progress',
-// 	title: "桌面提醒",
-// 	message: "当前进度...",
-// 	iconUrl: "images/black.png",
-// 	progress: 80
-// };
+	if (localStorage.hasOwnProperty('list')){
+		list = JSON.parse(localStorage['list']); 
+	} else {
 
-// chrome.notifications.create('id1',baba,
-// 		function() { 
-// 			alert("!"); 
-// 		} 
-// );
+		list = []; 
+		
+		localStorage.list = JSON.stringify(list); 
+	}
 
 
-function check(){
-	// alert("!"); 
+	var check = function(){
+		// console.log("!");
+		var now = new Date(); 
+		var objTime; 
+		// console.log(list); 
 
-}
+		for (x in list){
+			objTime = new Date(list[x].date); 
+			if (objTime.getTime() <= now.getTime()) {
+				console.log(list[x].title);
+				chrome.notifications.create('id1',{
+						type: 'list',
+						title: list[x].title,
+						message: '....Attention',
+						iconUrl: "images/geometry22.png",
+						items: [{ title: "", message: list[x].body}]
+					},
+					function(id) { 
+						// console.log(id); 
+					} 
+				);
+			}
+		}
+	}
 
 
-setInterval(check, 6000); 
+	// console.log(list); 
+
+	return {
+		config: noteConfig,
+		list: list,
+		check: check
+	}
+})(); 
+
+setInterval(watchDog.check, 60000); 

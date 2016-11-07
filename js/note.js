@@ -133,6 +133,7 @@ var note = (function(doc){
 
 	var push = function(elem){
 		elem.id = getCounter(); 
+		elem.isAct = false; 
 
 		console.log(elem); 
 		console.log(list); 
