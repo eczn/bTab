@@ -55,6 +55,13 @@
 	background-color: rgba(0,0,0,0); 
 }
 
+.note-display .date-select {
+	width: 24em; 
+	padding: 0 1.5em;
+	font-size: 10px;
+	color: rgba(255,255,255,.318);
+}
+
 .date-select, .time-select {
 	background-color: rgba(0,0,0,0); 
 	border: none;

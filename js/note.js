@@ -13,15 +13,48 @@ var defaultRender = function(str){
 			temp.remove(); 
 		},400); 
 	}); 
+}
 
+function date2str(date, config){
+	var temp; 
+
+	if (config){
+
+	} else {
+		config = new Array(); 
+		config[0] = new String('-'); 
+		config[1] = new String(':'); 
+	}
+	temp = date.getFullYear();
+	temp = temp.toString(); 
+	temp += config[0]+(date.getMonth()+1); 
+	temp += config[0]+date.getDate(); 
+	temp += " "+date.getHours(); 
+	temp += config[1]+date.getMinutes(); 
+
+	return temp; 
 }
 
 $("#note-save").click(function(e){
 	// $("#123 .note-title").val("1111"); 
+
+	// $("#note-save")
+
+
 	var titleInput = $(".note-edit .note .note-title").val(); 
 	var bodyInput = $(".note-edit .note .note-des").val(); 
 	var dateInput = $(".note-edit .note .date-select").val(); 
 	var timeInput = $(".note-edit .note .time-select").val(); 
+	var temp = bodyInput.split(''); 
+	bodyInput = ''; 
+	for (x in temp ){
+		// console.log(bodyInput.charCodeAt(x)); 
+		if (temp[x].charCodeAt(0) == 13 || temp[x].charCodeAt(0) == 10){
+			temp[x] = "<br />"; 
+		}
+
+		bodyInput+=temp[x]; 
+	}
 
 
 	note.push({
@@ -39,14 +72,24 @@ $("#note-save").click(function(e){
 			iconUrl: "images/geometry22.png",
 			items: [{ title: "", message: bodyInput}]
 		},
-		function(e) { 
-			// console.log(e); 
+		function(id) { 
+			// console.log(id); 
 		} 
 	);
 
 	note.render(defaultRender); 
 
 });
+
+// $(".note-edit .note-des").keydown(function(e){
+// 	console.group("Keydown test"); 
+// 		console.log(e.key);
+// 		console.log(e.keyCode);
+// 		console.log(e.key = 'd');
+// 		console.log(e.keyCode='68');
+// 	console.groupEnd(); 
+// });
+
 
 
 // ===== 
@@ -111,7 +154,8 @@ var note = (function(doc){
 							"</div>"; 
 		var middle = ''; 
 		var total = ''; 
-
+		var date; 
+		var temp; 
 		var listR = list.slice(0, list.length);
 		listR.reverse(); 
 
@@ -119,7 +163,12 @@ var note = (function(doc){
 			middle = templateStr.replace('$title$', listR[elem].title); 
 			middle = middle.replace('$id$', listR[elem].id); 
 			middle = middle.replace('$body$', listR[elem].body); 
-			middle = middle.replace('$date$', listR[elem].date); 
+
+			date = date2str(new Date(listR[elem].date)); 
+
+			middle = middle.replace('$date$', date);
+
+
 			middle = middle.replace('$pos$', listR.length-1-elem);
 			// alert(middle); 
 			total += middle; 
